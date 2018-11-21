@@ -8,7 +8,7 @@ function generateBoard(){
         $("#board-table").append("<tr id=row"+i+""+"><tr")
         for(var j=0;j<8;j++){
             $("#row"+i).append("<td id=cell_"+i+""+j+"></td>")
-            $("#cell_"+i+""+j).append("<canvas height=100% onclick=handleclick(i,j) onhover=handlehover(i,j) width =100% id=canv_"+i+""+j+"></canvas>")
+            $("#cell_"+i+""+j).append("<canvas height=100% onclick=handleclick(i,j) onmouseover=handlehover(i,j) width =100% id=canv_"+i+""+j+"></canvas>")
         }
     }
 }
