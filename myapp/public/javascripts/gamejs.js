@@ -27,19 +27,18 @@ function checkmove(game, x , y){//x,y ; the x y coordinates of the tile that has
     var tempx = 0
     var tempy = 0
     var tempboard = JSON.parse(JSON.stringify(game.board))
-    for (i in directions){
+    for (let i=0;i<directions.length;i++){
         tempboard = JSON.parse(JSON.stringify(game.board))
         tempx = x
         tempy = y
-        console.log("tempx "+tempx)
-        console.log("tempy  "+tempy)
+        // console.log("tempx "+tempx)
+        // console.log("tempy  "+tempy)
         while(true){
-            tempx+=i[1]
-            tempy+=i[0]
-            //     console.log("tempy  "+tempy)
-            //    console.log("tempx  "+tempx)
+            tempx+=directions[i][1]
+            tempy+=directions[i][0]
+               console.log("tempy  "+tempy)
+              console.log("tempx  "+tempx)
             if(tempx >7 || tempy >7 ){
-                console.log("hio")
                 break
             }
             if(game.board[tempy][tempx] != player.color && game.board[tempy][tempx] != 0 ){
@@ -51,7 +50,7 @@ function checkmove(game, x , y){//x,y ; the x y coordinates of the tile that has
                 break
             }
         }
-    }
+    }board = game.board
 }
 
 
