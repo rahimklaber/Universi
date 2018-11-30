@@ -1,8 +1,8 @@
 var express = require("express");
 var http = require("http");
 
-app.get("/", function(req, res) {
-    res.render('/splash')
+app.get("/test", function(req, res) {
+    res.render('splash.html')
 });
 
 
