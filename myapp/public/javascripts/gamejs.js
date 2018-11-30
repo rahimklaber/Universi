@@ -23,21 +23,21 @@ var game = new Game(1);
 var board = game.board;
 
 function checkmove(game, x , y){//x,y ; the x y coordinates of the tile that has been clicked
-    var directions = [[1,1],[-1,1],[1,-1],[-1,-1],[0,0],[1,0],[0,1],[-1,0],[0,-1]]
-    var tempx
-    var tempy
+    var directions = [[1,1],[-1,1],[1,-1],[-1,-1],[1,0],[0,1],[-1,0],[0,-1]]
+    var tempx = 0
+    var tempy = 0
     var tempboard = JSON.parse(JSON.stringify(game.board))
     for (i in directions){
         tempboard = JSON.parse(JSON.stringify(game.board))
         tempx = x
         tempy = y
-        //console.log(tempx)
+        console.log("tempx "+tempx)
         console.log("tempy  "+tempy)
         while(true){
             tempx+=i[1]
             tempy+=i[0]
-            //console.log("tempy  "+tempy)
-          //  console.log("tempx  "+tempx)
+            //     console.log("tempy  "+tempy)
+            //    console.log("tempx  "+tempx)
             if(tempx >7 || tempy >7 ){
                 console.log("hio")
                 break
