@@ -1,6 +1,6 @@
 var express = require("express");
 var http = require("http");
-var indexRouter = require("./routes/index.js");
+
 var port = process.argv[2];
 var app = express();
 
