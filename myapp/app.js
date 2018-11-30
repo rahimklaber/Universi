@@ -5,8 +5,8 @@ var port = process.argv[2];
 var app = express();
 
 
-router.get("", function (req, res) {
-    res.sendFile("splash.html", {root: "./public"});
+router.get("/", function (req, res) {
+    res.sendFile("/splash.html", {root: "./public"});
 });
 
 
