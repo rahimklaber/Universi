@@ -1,9 +1,9 @@
 var express = require("express");
 var http = require("http");
 
-var indexRouter = require("./routes/index");
-app.get("/play", indexRouter);
-app.get("/", (req, res));
+app.get("/", function(req, res) {
+    res.render('splash')
+});
 
 
 var port = process.argv[2];
