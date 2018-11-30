@@ -2,7 +2,7 @@ var express = require("express");
 var http = require("http");
 
 app.get("/", function(req, res) {
-    res.render('splash')
+    res.render('/splash')
 });
 
 
