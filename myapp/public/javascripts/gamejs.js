@@ -36,25 +36,28 @@ function checkmove(game, x, y) { //x,y ; the x y coordinates of the tile that ha
     var tempx = 0
     var tempy = 0
     var tempboard = JSON.parse(JSON.stringify(game.board))
+    var takeover
     for (let i = 0; i < directions.length; i++) {
         tempboard = JSON.parse(JSON.stringify(game.board))
-        tempboard[y][x] = player.color
         tempx = x
         tempy = y
+        takeover = false
         // console.log("tempx "+tempx)
         // console.log("tempy  "+tempy)
         while (true) {
             tempx += directions[i][1]
             tempy += directions[i][0]
-            console.log("tempy  " + tempy)
-            console.log("tempx  " + tempx)
             if (tempx > 7 || tempy > 7) {
                 break
             }
-            if (game.board[tempy][tempx] != player.color && game.board[tempy][tempx] != 0) {
-                tempboard[tempy][tempx] = player.color
+            if (game.board[tempx][tempy] != player.color && game.board[tempx][tempy] != 0) {
+                takeover = true
+                tempboard[tempx][tempy] = player.color
                 console.table(tempboard)
-            } else if (game.board[tempy][tempx] == player.color) {
+            } else if (game.board[tempx][tempy] == player.color) {
+                if(takeover == true){
+                    tempboard[x][y] = player.color
+                }
                 game.board = tempboard
                 break
             } else {
@@ -73,28 +76,28 @@ $(document).ready(function () {
 })
 
 function generateBoard() {
-    for (var i = 0; i < 8; i++) {
-        $("#board-table").append("<tr id=row" + i + "" + "><tr")
-        for (var j = 0; j < 8; j++) {
-            $("#row" + i).append("<td id=cell_" + j + "" + i + "></td>")
-            $("#cell_" + j + "" + i).append("<canvas height=100% onclick=handleclick(" + j + "," + i + ") onmouseover=handlehover(i,j) width =100% id=canv_" + j + "" + i + "></canvas>")
+    for (var y = 0; y < 8; y++) {
+        $("#board-table").append("<tr id=row" + y + "" + "><tr")
+        for (var x = 0; x < 8; x++) {
+            $("#row" + y).append("<td id=cell_" + x + "" + y + "></td>")
+            $("#cell_" + x + "" + y).append("<canvas height=100% onclick=handleclick(" + x + "," + y + ") onmouseover=handlehover(i,j) width =100% id=canv_" + x + "" + y + "></canvas>")
         }
     }
 }
 
 function draw() {
-    for (var i = 0; i < 8; i++) {
-        for (var j = 0; j < 8; j++) {
-            var canvas = $("#canv_" + j + "" + i)[0]
+    for (var y = 0; y < 8; y++) {
+        for (var x = 0; x < 8; x++) {
+            var canvas = $("#canv_" + x + "" + y)[0]
             var ctx = canvas.getContext("2d")
-            if (board[i][j] == 1) {
+            if (board[x][y] == 1) {
                 ctx.fillStyle = "green"
                 ctx.fillRect(0, 0, 100, 100)
                 ctx.beginPath()
                 ctx.fillStyle = "white"
                 ctx.arc(50, 50, 50, 0, 2 * Math.PI)
                 ctx.fill()
-            } else if (board[i][j] == 2) {
+            } else if (board[x][y] == 2) {
                 ctx.fillStyle = "green"
                 ctx.fillRect(0, 0, 100, 100)
                 ctx.beginPath()
