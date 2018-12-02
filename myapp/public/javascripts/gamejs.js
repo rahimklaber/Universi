@@ -1,13 +1,27 @@
 var socket = new WebSocket("ws://localhost:80")
 var game
+var playernr
 socket.onmessage = function (event) {
 	let data = JSON.parse(event.data)
-	game = data
+	if (typeof (data[0]) != "undefined") {
+		game = data[0]
+		playernr = data[1]
+	}else{
+		game = data
+	}
 	draw()
 }
 $(document).ready(function () {
 	generateBoard()
 })
+
+function getPlayer() {
+	if (playernr == 1) {
+		return game.player1
+	} else {
+		return game.player2
+	}
+}
 
 function generateBoard() {
 	for (var y = 0; y < 8; y++) {
@@ -47,5 +61,9 @@ function draw() {
 }
 
 function handleclick(x, y) {
-	socket.send(JSON.stringify([game.id,[x,y]]))
+	if (getPlayer().turn == true) {
+		socket.send(JSON.stringify([game.id, [x, y],playernr]))
+	} else {
+		alert("not ur turn")
+	}
 }

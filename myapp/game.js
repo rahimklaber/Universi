@@ -22,16 +22,16 @@ module.exports.player = function (socket) {
 	this.turn = false
 	this.moves = 0
 	this.winnner = false
-	this.name
+	this.name = null
 }
 
-module.exports.checkmove = function (game, x, y) { //x,y ; the x y coordinates of the tile that has been clicked
+module.exports.checkmove = function (game, x, y, playernr) { //x,y ; the x y coordinates of the tile that has been clicked
 	var player
-	if (game.player1.turn == true){
+	if (playernr == 1) {
 		player = game.player1
 		game.player1.turn = false
 		game.player2.turn = true
-	}else{
+	} else {
 		player = game.player2
 		game.player2.turn = false
 		game.player1.turn = true
@@ -50,6 +50,7 @@ module.exports.checkmove = function (game, x, y) { //x,y ; the x y coordinates o
 	var tempy = 0
 	var tempboard = JSON.parse(JSON.stringify(game.board))
 	var takeover
+	var valid = false
 	for (let i = 0; i < directions.length; i++) {
 		tempboard = JSON.parse(JSON.stringify(game.board))
 		tempx = x
@@ -69,6 +70,7 @@ module.exports.checkmove = function (game, x, y) { //x,y ; the x y coordinates o
 			} else if (game.board[tempx][tempy] == player.color) {
 				if (takeover == true) {
 					tempboard[x][y] = player.color
+					valid = true
 				}
 				game.board = tempboard
 				break
@@ -76,5 +78,10 @@ module.exports.checkmove = function (game, x, y) { //x,y ; the x y coordinates o
 				break
 			}
 		}
+
+	}
+	if (valid != true) {
+		game.player1.turn = !game.player1.turn
+		game.player2.turn = !game.player2.turn
 	}
 }

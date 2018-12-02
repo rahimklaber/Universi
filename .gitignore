@@ -371,3 +371,17 @@ myapp/node_modules/ws/lib/sender.js
 myapp/node_modules/ws/lib/validation.js
 myapp/node_modules/ws/lib/websocket.js
 myapp/node_modules/ws/lib/websocket-server.js
+myapp/node_modules/ws/lib/permessage-deflate.js
+myapp/node_modules/ws/LICENSE
+myapp/node_modules/ws/README.md
+myapp/node_modules/ws/browser.js
+myapp/node_modules/ws/index.js
+myapp/node_modules/ws/lib/buffer-util.js
+myapp/node_modules/ws/lib/constants.js
+myapp/node_modules/ws/lib/event-target.js
+myapp/node_modules/ws/lib/extension.js
+myapp/node_modules/ws/lib/receiver.js
+myapp/node_modules/ws/lib/sender.js
+myapp/node_modules/ws/lib/validation.js
+myapp/node_modules/ws/lib/websocket.js
+myapp/node_modules/ws/lib/websocket-server.js

@@ -16,7 +16,7 @@ const wss = new websocket.Server({
 
 app.get("/", function (req, res) {
 	res.sendFile("splash.html", {
-		root: "./myapp/public"
+		root: "./public"
 	})
 })
 
@@ -29,7 +29,8 @@ wss.on("connection", function (ws) {
 		let id = data[0]
 		let x = data[1][0]
 		let y = data[1][1]
-		checkmove(games[id], x, y)
+		let playernr = data[2]
+		checkmove(games[id], x, y, playernr)
 		games[id].player1.socket.send(JSON.stringify(games[id]))
 		games[id].player2.socket.send(JSON.stringify(games[id]))
 
@@ -40,7 +41,7 @@ wss.on("connection", function (ws) {
 
 			games[i].player2 = new player(ws)
 			games[i].player2.color = 2
-			games[i].player2.socket.send(JSON.stringify(games[i]))
+			games[i].player2.socket.send(JSON.stringify([games[i],2]))
 			return
 		}
 	}
@@ -49,7 +50,7 @@ wss.on("connection", function (ws) {
 	newgame.player1 = new player(ws)
 	newgame.player1.color = 1
 	newgame.player1.turn = true
-	newgame.player1.socket.send(JSON.stringify(newgame))
+	newgame.player1.socket.send(JSON.stringify([newgame,1]))
 	games.push(newgame)
 
 
