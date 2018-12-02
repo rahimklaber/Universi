@@ -4,7 +4,8 @@ var websocket = require("ws")
 var game = require("./game").game
 var player = require("./game").player
 var checkmove = require("./game").checkmove
-var port = process.argv[2]
+// var port = process.argv[2]
+var port = "80"
 var app = express()
 var games = []
 
