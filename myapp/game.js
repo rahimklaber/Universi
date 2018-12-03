@@ -21,6 +21,7 @@ module.exports.player = function (socket) {
 	this.color = null
 	this.turn = false
 	this.moves = 0
+	this.pieces = 2
 	this.winnner = false
 	this.name = null
 }
@@ -56,8 +57,7 @@ module.exports.checkmove = function (game, x, y, playernr) { //x,y ; the x y coo
 		tempx = x
 		tempy = y
 		takeover = false
-		// console.log("tempx "+tempx)
-		// console.log("tempy  "+tempy)
+
 		while (true) {
 			tempx += directions[i][1]
 			tempy += directions[i][0]
