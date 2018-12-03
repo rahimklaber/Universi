@@ -61,6 +61,10 @@ function draw() {
 }
 
 function handleclick(x, y) {
+	if(game.board[x][y] !== 0){
+		alert("learn how to play the game dumbass")
+		return
+	}
 	if (getPlayer().turn == true) {
 		socket.send(JSON.stringify([game.id, [x, y],playernr]))
 	} else {
