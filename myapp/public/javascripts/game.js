@@ -30,12 +30,8 @@ module.exports.checkmove = function (game, x, y, playernr) { //x,y ; the x y coo
 	var player
 	if (playernr == 1) {
 		player = game.player1
-		game.player1.turn = false
-		game.player2.turn = true
 	} else {
 		player = game.player2
-		game.player2.turn = false
-		game.player1.turn = true
 	}
 	var directions = [
 		[1, 1],
@@ -80,8 +76,66 @@ module.exports.checkmove = function (game, x, y, playernr) { //x,y ; the x y coo
 		}
 
 	}
-	if (valid != true) {
+	if (valid == true) {
+		player.moves += 1
 		game.player1.turn = !game.player1.turn
 		game.player2.turn = !game.player2.turn
 	}
+	//implement check if there are any more valid moves
+
+}
+
+module.exports.valid_move = valid_move
+module.exports.move_possible = move_possible
+function valid_move(game, x, y){
+	var directions = [
+		[1, 1],
+		[-1, 1],
+		[1, -1],
+		[-1, -1],
+		[1, 0],
+		[0, 1],
+		[-1, 0],
+		[0, -1]
+	]
+	var tempx = 0
+	var tempy = 0
+	var takeover
+	var valid = false
+	for (let i = 0; i < directions.length; i++) {
+		tempx = x
+		tempy = y
+		takeover = false
+
+		while (true) {
+			tempx += directions[i][1]
+			tempy += directions[i][0]
+			if (tempx > 7 || tempy > 7 || tempx < 0 || tempy < 0) {
+				break
+			}
+			if (game.board[tempx][tempy] != player.color && game.board[tempx][tempy] != 0) {
+				takeover = true
+			} else if (game.board[tempx][tempy] == player.color) {
+				if (takeover == true) {
+					valid = true
+					return valid
+				}
+				break
+			} else {
+				break
+			}
+		}
+
+	}
+	return valid
+}
+
+
+function move_possible(game,color){
+	for(let y = 0;y<8;y++){
+		for(let x = 0;x<8;x++){
+			if (checkmove(x,y)) return true
+		}
+	}
+
 }
