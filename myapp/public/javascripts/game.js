@@ -262,7 +262,8 @@
 
 	exports.getGameIdWithWs = function (games, ws) {
 		for (let i = 0; i < games.length; i++) {
-			if (games[i].player1.socket == ws) {
+			if(typeof(games[i]) == 'undefined')	break
+			if (games[i].player1.socket == ws || games[i].player2.socket == ws ) {
 				return i
 			}
 		}

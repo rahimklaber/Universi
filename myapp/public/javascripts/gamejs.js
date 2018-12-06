@@ -52,8 +52,9 @@ socket.onopen = function (event) {
 				draw()
 				break
 			case "game-end":
+				console.log("end")
 				game = data.game
-				if (getPlayer(playernr).winner) $("#turn").html(getPlayer("you win"))
+				if (getPlayer(playernr).winner) $("#turn").html("you win")
 				else $("#turn").html("you lose")
 				draw()
 				break
