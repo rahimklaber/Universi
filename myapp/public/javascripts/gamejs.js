@@ -10,19 +10,61 @@ socket.onopen = function (event) {
 		let data = JSON.parse(event.data)
 		switch (data.message) {
 			case "name":
+				//todo add otherplayernr
 				playernr = data.playernr
-				socket.send(JSON.stringify({message: "name", name: name, id: data.id, playernr: playernr}))
+				otherplayernr = 3 - playernr
+				socket.send(JSON.stringify({
+					message: "name",
+					name: name,
+					id: data.id,
+					playernr: playernr
+				}))
 				break
 			case "game-start":
 				console.log("start")
 				game = data.game
-				$("#players").html(getPlayer(playernr).name+"(you) vs "+getPlayer(otherplayernr).name)
+				$("#players").html(getPlayer(playernr).name + "(you) vs " + getPlayer(otherplayernr).name)
+				if (getPlayer(playernr).turn) $("#turn").html("your turn")
+				else $("#turn").html(getPlayer(otherplayernr).name + "'s turn")
 				draw()
 				break
 			case "game-move":
 				game = data.game
+				if (getPlayer(playernr).turn) $("#turn").html("your turn")
+				else $("#turn").html(getPlayer(otherplayernr).name + "'s turn")
 				draw()
 				break
+			case "move-skip":
+				game = data.game
+				if (data.playernr == playernr) $("#turn").html(getPlayer(otherplayernr).name + "'s turn, you had no moves available")
+				else $("#turn").html("your turn," + getPlayer(otherplayernr).name + " had no moves available")
+				draw()
+				break
+			case "nomove-end":
+				game = data.game
+				if (getPlayer(playernr).winner) $("#turn").html(getPlayer("you win, there are no more moves available"))
+				else $("#turn").html("you lose, there are no more moves available")
+				draw()
+				break
+			case "nomove-tie":
+				game = data.game
+				$("#turn").html(getPlayer("it's a tie, there are no more moves available"))
+				draw()
+				break
+			case "game-end":
+				game = data.game
+				if (getPlayer(playernr).winner) $("#turn").html(getPlayer("you win"))
+				else $("#turn").html("you lose")
+				draw()
+				break
+			case "game-tie":
+				game = data.game
+				$("#turn").html(getPlayer("it's a tie"))
+				draw()
+				break
+			case "aborted":
+			$("#turn").html(getPlayer("the other player has aborted"))
+			break
 			default:
 				break
 		}
@@ -87,15 +129,16 @@ function draw() {
 }
 
 function handleclick(x, y) {
+	if(socket.readyState == 3) return
 	if (game == null) return alert("waiting for second player")
-	if (game.board[x][y] !== 0) return alert("learn how to play the game dumbass")
 	if (getPlayer(playernr).turn == true) {
+		if (!gameex.valid_move(game,x,y,playernr)) return alert("invalid move")
 		socket.send(JSON.stringify([game.id, [x, y], playernr]))
 	} else {
 		alert("not ur turn")
 	}
 }
 
-function handlehover(x, y){
+function handlehover(x, y) {
 	// $("#cell_" + x + "" + y + "").effect("highlight",{color : "white"},100)
 }
