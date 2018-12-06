@@ -11,7 +11,7 @@ var getGameWithIdWs = require("./public/javascripts/game").getGameIdWithWs
 var port = process.argv[2]
 var app = express()
 var games = []
-
+//todo add routes x
 app.use(express.static(__dirname + "/public"))
 var server = http.createServer(app)
 const wss = new websocket.Server({
