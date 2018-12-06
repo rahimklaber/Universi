@@ -42,13 +42,13 @@ socket.onopen = function (event) {
 				break
 			case "nomove-end":
 				game = data.game
-				if (getPlayer(playernr).winner) $("#turn").html(getPlayer("you win, there are no more moves available"))
+				if (getPlayer(playernr).winner) $("#turn").html("you win, there are no more moves available")
 				else $("#turn").html("you lose, there are no more moves available")
 				draw()
 				break
 			case "nomove-tie":
 				game = data.game
-				$("#turn").html(getPlayer("it's a tie, there are no more moves available"))
+				$("#turn").html("it's a tie, there are no more moves available")
 				draw()
 				break
 			case "game-end":
@@ -60,11 +60,11 @@ socket.onopen = function (event) {
 				break
 			case "game-tie":
 				game = data.game
-				$("#turn").html(getPlayer("it's a tie"))
+				$("#turn").html("it's a tie")
 				draw()
 				break
 			case "aborted":
-			$("#turn").html(getPlayer("the other player has aborted"))
+			$("#turn").html("the other player has aborted")
 			break
 			default:
 				break
