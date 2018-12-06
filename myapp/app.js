@@ -28,7 +28,7 @@ var id = 0
 wss.on("connection", function (ws) {
 	ws.on("close", function () {
 		let id = getGameWithIdWs(games, ws)
-
+		if(id == -1) return
 		if (games[id].gamestate == 1) {
 			if (games[id].player1.socket == ws) {
 				games[id].player2.socket.send(JSON.stringify({
@@ -90,6 +90,7 @@ wss.on("connection", function (ws) {
 	})
 
 	for (let i = 0; i < games.length; i++) {
+		if(typeof(games[i])=='undefined') continue
 		if (games[i].player2 == null) {
 
 			games[i].player2 = new player(ws)
