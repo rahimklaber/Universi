@@ -181,7 +181,7 @@ function playercolor(){
 
 function forfeit_button() {
     if(socket.readyState == 3) {
-        document.location.href="/";
+        alert("The game is over or you forfeitted. Please click the home button to go back to the homescreen.");
     } else 
         var r = confirm("Are you sure you want to forfeit?");
         if (r == true) {
@@ -192,4 +192,11 @@ function forfeit_button() {
 		} else {
 			console.log("Nothing");
 		}
+};
+
+function home_button() {
+	if(socket.readyState == 3) {
+        document.location.href="/";
+	} else 
+	alert("The game is still going on. You can only go to the homescreen if the game is over, or if you forfeit the ongoing game.");
 };
