@@ -28,57 +28,57 @@ socket.onopen = function (event) {
 				console.log("start")
 				Timer();
 				playercolor();
-				pieces();
 				game = data.game
 				$("#players").html(getPlayer(playernr).name + "(you) vs " + getPlayer(otherplayernr).name)
 				if (getPlayer(playernr).turn) $("#turn").html("your turn")
 				else $("#turn").html(getPlayer(otherplayernr).name + "'s turn")
 				draw()
+				pieces();
 				break
 			case "game-move":
-				pieces();
 				game = data.game
 				if (getPlayer(playernr).turn) $("#turn").html("your turn")
 				else $("#turn").html(getPlayer(otherplayernr).name + "'s turn")
 				draw()
+				pieces();
 				break
 			case "move-skip":
-				pieces();
 				game = data.game
 				if (data.playernr == playernr) $("#turn").html(getPlayer(otherplayernr).name + "'s turn, you had no moves available")
 				else $("#turn").html("your turn," + getPlayer(otherplayernr).name + " had no moves available")
 				draw()
+				pieces();
 				break
 			case "nomove-end":
-				pieces();
 				clearTimeout(timer);
 				game = data.game
 				if (getPlayer(playernr).winner) $("#turn").html("you win, there are no more moves available")
 				else $("#turn").html("you lose, there are no more moves available")
 				draw()
+				pieces();
 				break
 			case "nomove-tie":
-				pieces();
 				clearTimeout(timer);
 				game = data.game
 				$("#turn").html("it's a tie, there are no more moves available")
 				draw()
+				pieces();
 				break
 			case "game-end":
-				pieces();
 				console.log("end")
 				clearTimeout(timer);
 				game = data.game
 				if (getPlayer(playernr).winner) $("#turn").html("you win")
 				else $("#turn").html("you lose")
 				draw()
+				pieces();
 				break
 			case "game-tie":
-				pieces();
 				clearTimeout(timer);
 				game = data.game
 				$("#turn").html("it's a tie")
 				draw()
+				pieces();
 				break
 			case "aborted":
 				pieces();
@@ -210,7 +210,9 @@ function home_button() {
 };
 
 function pieces() {
-	gameex.count_pieces();
-	$('#player1_pieces').text('Player 1 pieces:' + count1);
-	$('#player2_pieces').text('Player 1 pieces:' + count2);
+	var count = gameex.count_pieces(game);
+	var first = getPlayer(playernr).name;
+	var second = getPlayer(otherplayernr).name;
+	$('#player1_pieces').text(first + ' pieces: ' + count[0]);
+	$('#player2_pieces').text(second + ' pieces: ' + count[1]);
 }
