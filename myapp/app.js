@@ -34,6 +34,12 @@ app.get("/", function (req, res) {
 	})
 })
 
+app.get("/play", function (req, res) {
+	res.sendFile("game.html", {
+		root: "./public"
+	})
+})
+
 var id = 0
 wss.on("connection", function (ws) {
 	ws.on("close", function () {
