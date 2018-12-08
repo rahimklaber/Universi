@@ -3,6 +3,9 @@ var socket = new WebSocket("ws://localhost:80")
 var game
 var playernr
 var otherplayernr
+var minutes = 0;
+var seconds = 0;
+
 socket.onopen = function (event) {
 	generateBoard()
 	// change the messages received for mat to {type:" ", game}
@@ -142,4 +145,24 @@ function handleclick(x, y) {
 
 function handlehover(x, y) {
 	// $("#cell_" + x + "" + y + "").effect("highlight",{color : "white"},100)
+}
+
+function Timer(){
+    timer = setTimeout(function(){
+        seconds++;
+    if(seconds > 59){seconds = 0;minutes++;
+
+    if(minutes < 10) {
+        $('#minutes').text('0' + minutes + ':');}
+         else $('#minutes').text(minutes + ':');
+    }
+
+    if(seconds < 10) {
+        $('#seconds').text('0' + seconds);} else {
+        $('#seconds').text(seconds);
+    }
+    
+
+        Timer();
+    }, 1000);
 }
