@@ -180,12 +180,10 @@ function playercolor(){
 }
 
 function forfeit_button() {
-    $('forfeit').click(function(){
     if(socket.readyState == 3) {
         document.location.href="/";
     } else 
         var r = confirm("Are you sure you want to forfeit?");
         if (r == true)
             socket.close();
-    }
 )};
