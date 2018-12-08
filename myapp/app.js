@@ -8,9 +8,17 @@ var valid_move = require("./public/javascripts/game").valid_move
 var count_pieces = require("./public/javascripts/game").count_pieces
 var move_possible = require("./public/javascripts/game").move_possible
 var getGameWithIdWs = require("./public/javascripts/game").getGameIdWithWs
+var getOngoingGames = require("./public/javascripts/game").getOngoingGames
+var gameStats = require("./public/javascripts/game").gameStats
+var leaderboardsEntry = require("./public/javascripts/game").leaderboardsEntry
+// var getLeaderboards =
+
 var port = process.argv[2]
 var app = express()
 var games = []
+var gamesCompleted = new Object()
+gamesCompleted.nr = 0
+var users = new Object()
 //todo add routes x
 app.use(express.static(__dirname + "/public"))
 var server = http.createServer(app)
@@ -19,6 +27,8 @@ const wss = new websocket.Server({
 })
 
 app.get("/", function (req, res) {
+	let stats = new gameStats(games,gamesCompleted,users)
+	console.log(stats)
 	res.sendFile("splash.html", {
 		root: "./public"
 	})
@@ -36,7 +46,7 @@ wss.on("connection", function (ws) {
 				}))
 				games[id].player2.socket.close()
 			}else{
-				games[id].player1.socket.send(JSON.stringify({
+				games[id].player1.socket.send(JSON.stringify({ 
 					message: "aborted"
 				}))
 				games[id].player1.socket.close()
@@ -52,12 +62,11 @@ wss.on("connection", function (ws) {
 
 		if (data.message == "name") {
 			if (data.playernr == 1) {
-				console.log(data.name)
 				games[data.id].player1.name = data.name
+				users[data.name] = new leaderboardsEntry(data.name)
 			} else {
-				console.log("start")
-				console.log(data.id)
 				games[data.id].player2.name = data.name
+				users[data.name] = new leaderboardsEntry(data.name)
 				games[data.id].gamestate = 1
 				games[data.id].player2.socket.send(JSON.stringify({
 					game: games[data.id],
@@ -75,7 +84,7 @@ wss.on("connection", function (ws) {
 		let x = data[1][0]
 		let y = data[1][1]
 		let playernr = data[2]
-		if (!checkmove(games,games[id], x, y, playernr)) {
+		if (!checkmove(games,games[id], x, y, playernr,users,gamesCompleted)) {// if checkmove has not sent any messages
 
 			games[id].player1.socket.send(JSON.stringify({
 				game: games[id],

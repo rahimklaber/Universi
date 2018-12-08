@@ -1,5 +1,15 @@
 (function (exports) {
-
+	exports.leaderboardsEntry = function(name){
+		this.name = name 
+		this.wins = 0
+	}
+	exports.gameStats = function (games, gamesCompleted,users) {
+		this.ongoingGames = getOngoingGames(games)
+		this.ongoingGamesCount = this.ongoingGames.length
+		this.playersOnline = this.ongoingGamesCount * 2
+		this.gamesCompleted = gamesCompleted.nr
+		this.leaderboards = getLeaderBoards(users)
+	}
 	exports.game = function (id) {
 		this.id = id
 		this.player1 = null
@@ -28,7 +38,7 @@
 		this.name = null
 	}
 
-	exports.checkmove = function (games, game, x, y, playernr) { //x,y ; the x y coordinates of the tile that has been clicked
+	exports.checkmove = function (games, game, x, y, playernr, users, gamesCompleted) { //x,y ; the x y coordinates of the tile that has been clicked
 		var player
 		if (playernr == 1) {
 			player = game.player1
@@ -86,11 +96,14 @@
 		//implement check if there are any more valid moves
 		let counts = count_pieces(game)
 		if (counts[0] + counts[1] == 64) { //check for game end
+			gamesCompleted.nr++
 			if (counts[0] != counts[1]) {
 				if (counts[0] > counts[1]) {
 					game.player1.winner = true
+					users[game.player1.name].wins++
 				} else {
 					game.player2.winner = true
+					users[game.player2.name].wins++
 				}
 				game.player2.socket.send(JSON.stringify({
 					message: "game-end",
@@ -151,11 +164,14 @@
 			}))
 			return true
 		} else if (!possible1 && !possible2) {
+			gamesCompleted.nr++
 			if (counts[0] != counts[1]) {
 				if (counts[0] > counts[1]) {
 					game.player1.winner = true
+					users[game.player1.name].wins++
 				} else {
 					game.player2.winner = true
+					users[game.player2.name].wins++
 				}
 				game.player1.socket.send(JSON.stringify({
 					message: "nomove-end",
@@ -188,6 +204,7 @@
 	}
 
 	exports.valid_move = valid_move
+
 	function valid_move(game, x, y, color) {
 		var directions = [
 			[1, 1],
@@ -203,7 +220,7 @@
 		var tempy = 0
 		var takeover
 		var valid = false
-		if(game.board[x][y] != 0) return false
+		if (game.board[x][y] != 0) return false
 		for (let i = 0; i < directions.length; i++) {
 			tempx = x
 			tempy = y
@@ -232,7 +249,8 @@
 		return valid
 	}
 	exports.move_possible = move_possible
-	 function move_possible(game, color) {
+
+	function move_possible(game, color) {
 		for (let y = 0; y < 8; y++) {
 			for (let x = 0; x < 8; x++) {
 				if (valid_move(game, x, y, color)) return true
@@ -243,7 +261,8 @@
 
 
 	exports.count_pieces = count_pieces
-	 function count_pieces(game) {
+
+	function count_pieces(game) {
 		var count1 = 0
 		var count2 = 0
 		for (let x = 0; x < 8; x++) {
@@ -262,12 +281,45 @@
 
 	exports.getGameIdWithWs = function (games, ws) {
 		for (let i = 0; i < games.length; i++) {
-			if(typeof(games[i]) == 'undefined')	continue
-			if (games[i].player1.socket == ws || games[i].player2.socket == ws ) {
+			if (typeof (games[i]) == 'undefined') continue
+			if (games[i].player1.socket == ws || games[i].player2.socket == ws) {
 				return i
 			}
 		}
 		return -1
+	}
+
+	exports.getOngoingGamesCount = function (games) {
+		var count = 0
+		for (let i = 0; i < games.lenght; i++) {
+			if (typeof (games[i]) !== "undefined") count++
+		}
+		return count
+	}
+	exports.getOngoingGames = getOngoingGames
+
+	function getOngoingGames(games) {
+		var ongoingGames = []
+		console.log(games)
+		for (let i = 0; i < games.length; i++) {
+			if (i in games) {
+				ongoingGames.push(games[i])
+				console.log("pushed")
+			}
+		}
+		return ongoingGames
+	}
+	function getLeaderBoards(users) {
+		var leaderboards = []
+		for (let key in users) {
+			if (users.hasOwnProperty(key)) {
+				leaderboards.push([key,users[key].wins])
+			}
+		}
+		leaderboards.sort(function (a, b) {
+			return b[1] - a[1]
+		})
+		return leaderboards
 	}
 
 }(typeof exports === 'undefined' ? this.gameex = {} : exports));
