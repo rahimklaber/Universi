@@ -187,6 +187,8 @@ function forfeit_button() {
         if (r == true) {
 			console.log("Closing socket");
 			socket.close();
+			clearTimeout(timer);
+			$('#turn').text("You forfeitted the game.");
 		} else {
 			console.log("Nothing");
 		}
