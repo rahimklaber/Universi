@@ -45,31 +45,36 @@ socket.onopen = function (event) {
 				draw()
 				break
 			case "nomove-end":
+				clearTimeout(timer);
 				game = data.game
 				if (getPlayer(playernr).winner) $("#turn").html("you win, there are no more moves available")
 				else $("#turn").html("you lose, there are no more moves available")
 				draw()
 				break
 			case "nomove-tie":
+				clearTimeout(timer);
 				game = data.game
 				$("#turn").html("it's a tie, there are no more moves available")
 				draw()
 				break
 			case "game-end":
 				console.log("end")
+				clearTimeout(timer);
 				game = data.game
 				if (getPlayer(playernr).winner) $("#turn").html("you win")
 				else $("#turn").html("you lose")
 				draw()
 				break
 			case "game-tie":
+				clearTimeout(timer);
 				game = data.game
 				$("#turn").html("it's a tie")
 				draw()
 				break
 			case "aborted":
-			$("#turn").html("the other player has aborted")
-			break
+				clearTimeout(timer);
+				$("#turn").html("the other player has aborted")
+				break
 			default:
 				break
 		}
