@@ -6,6 +6,7 @@ var otherplayernr
 var minutes = 0;
 var seconds = 0;
 
+
 socket.onopen = function (event) {
 	generateBoard()
 	// change the messages received for mat to {type:" ", game}
@@ -167,8 +168,12 @@ function Timer(){
         $('#seconds').text('0' + seconds);} else {
         $('#seconds').text(seconds);
     }
-    
-
         Timer();
     }, 1000);
+}
+
+function playercolor(){
+	if(playernr == 1) {
+		$('#player_color').text('Your color is white');}
+		 else $('#player_color').text('Your color is black');
 }
