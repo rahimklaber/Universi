@@ -184,6 +184,10 @@ function forfeit_button() {
         document.location.href="/";
     } else 
         var r = confirm("Are you sure you want to forfeit?");
-        if (r == true)
-            socket.close();
-)};
+        if (r == true) {
+			console.log("Closing socket");
+			socket.close();
+		} else {
+			console.log("Nothing");
+		}
+};
