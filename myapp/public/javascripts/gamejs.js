@@ -179,12 +179,13 @@ function playercolor(){
 		 else $('#player_color').text('Your color is black');
 }
 
-//No function needed around listener - just to clarify
-$('forfeit').click(function(){
-if(socket.readyState == 3) {
-	document.location.href="/";
-} else 
-	var r = confirm("Are you sure you want to forfeit?");
-	if (r == true)
-		socket.close();
-});
+function forfeit_button() {
+    $('forfeit').click(function(){
+    if(socket.readyState == 3) {
+        document.location.href="/";
+    } else 
+        var r = confirm("Are you sure you want to forfeit?");
+        if (r == true)
+            socket.close();
+    }
+)};
