@@ -25,6 +25,7 @@ socket.onopen = function (event) {
 				break
 			case "game-start":
 				console.log("start")
+				Timer();
 				game = data.game
 				$("#players").html(getPlayer(playernr).name + "(you) vs " + getPlayer(otherplayernr).name)
 				if (getPlayer(playernr).turn) $("#turn").html("your turn")
