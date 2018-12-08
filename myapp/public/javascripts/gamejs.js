@@ -28,6 +28,7 @@ socket.onopen = function (event) {
 				console.log("start")
 				Timer();
 				playercolor();
+				pieces();
 				game = data.game
 				$("#players").html(getPlayer(playernr).name + "(you) vs " + getPlayer(otherplayernr).name)
 				if (getPlayer(playernr).turn) $("#turn").html("your turn")
@@ -35,18 +36,21 @@ socket.onopen = function (event) {
 				draw()
 				break
 			case "game-move":
+				pieces();
 				game = data.game
 				if (getPlayer(playernr).turn) $("#turn").html("your turn")
 				else $("#turn").html(getPlayer(otherplayernr).name + "'s turn")
 				draw()
 				break
 			case "move-skip":
+				pieces();
 				game = data.game
 				if (data.playernr == playernr) $("#turn").html(getPlayer(otherplayernr).name + "'s turn, you had no moves available")
 				else $("#turn").html("your turn," + getPlayer(otherplayernr).name + " had no moves available")
 				draw()
 				break
 			case "nomove-end":
+				pieces();
 				clearTimeout(timer);
 				game = data.game
 				if (getPlayer(playernr).winner) $("#turn").html("you win, there are no more moves available")
@@ -54,12 +58,14 @@ socket.onopen = function (event) {
 				draw()
 				break
 			case "nomove-tie":
+				pieces();
 				clearTimeout(timer);
 				game = data.game
 				$("#turn").html("it's a tie, there are no more moves available")
 				draw()
 				break
 			case "game-end":
+				pieces();
 				console.log("end")
 				clearTimeout(timer);
 				game = data.game
@@ -68,12 +74,14 @@ socket.onopen = function (event) {
 				draw()
 				break
 			case "game-tie":
+				pieces();
 				clearTimeout(timer);
 				game = data.game
 				$("#turn").html("it's a tie")
 				draw()
 				break
 			case "aborted":
+				pieces();
 				clearTimeout(timer);
 				$("#turn").html("the other player has aborted")
 				break
@@ -200,3 +208,9 @@ function home_button() {
 	} else 
 	alert("The game is still going on. You can only go to the homescreen if the game is over, or if you forfeit the ongoing game.");
 };
+
+function pieces() {
+	gameex.count_pieces();
+	$('#player1_pieces').text('Player 1 pieces:' + count1);
+	$('#player2_pieces').text('Player 1 pieces:' + count2);
+}
