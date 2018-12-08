@@ -27,6 +27,7 @@ socket.onopen = function (event) {
 			case "game-start":
 				console.log("start")
 				Timer();
+				playercolor();
 				game = data.game
 				$("#players").html(getPlayer(playernr).name + "(you) vs " + getPlayer(otherplayernr).name)
 				if (getPlayer(playernr).turn) $("#turn").html("your turn")
@@ -177,3 +178,15 @@ function playercolor(){
 		$('#player_color').text('Your color is white');}
 		 else $('#player_color').text('Your color is black');
 }
+
+//No function needed around listener - just to clarify
+function forfeit_button() {
+	$('forfeit').click(function(){
+	if(socket.readyState == 3) {
+		document.location.href="/";
+	} else 
+		var r = confirm("Are you sure you want to forfeit?");
+		if (r == true)
+			socket.close();
+	}
+)};
