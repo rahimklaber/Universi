@@ -2,40 +2,45 @@
 <html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="myStyle.css" />
-	<link rel = "stylesheet" type ="text/css" href ="splash.css" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/splash.css" />
 </head>
 
 <body>
-	<h1>Universi</h1>
-	<p>One of the world's most popular board games since 1883</p>
-	<br>
-	<p>Ongoing games</p>
-	<ul>
-		<li>user1 vs user2</li>
-		<li>user1 vs user2</li>
-		<li>user1 vs user2</li>
-		<li>user1 vs user2</li>
-		<li>user1 vs user2</li>
-		<li>user1 vs user2</li>
-	</ul>
-	<br>
-	<p>Leaderboards</p>
-	<ol>
-		<li>Tio Rahim</li>
-		<li>Banano</li>
-	</ol>
-
-	<form action="/play">
-		<button>Join a game</button>
-	</form>
 
 
-	<button>How to play</button>
-	<br>
-	<p>20 ongoing games</p>
-	<p>200 people online</p>
-	<p>2 games completed</p>
+	<div class="left" class="stats">
+		<p>Ongoing games</p>
+		<ul>
+			<li>user1 vs user2</li>
+			<li>user1 vs user2</li>
+			<li>user1 vs user2</li>
+			<li>user1 vs user2</li>
+			<li>user1 vs user2</li>
+			<li>user1 vs user2</li>
+		</ul>
+	</div>
+	<div class="middle">
+		<h1>Universi</h1>
+		<p>One of the world's most popular board games since 1883</p>
+		<br>
+		<p>20 ongoing games</p>
+		<p>200 people online</p>
+		<p>2 games completed</p>
+
+
+		<form action="/play">
+			<button>Join a game</button>
+		</form>
+		<button>How to play</button>
+	</div>
+	<div class="right" class="stats">
+		<p>Leaderboards</p>
+		<ol>
+			<li>Tio Rahim</li>
+			<li>Banano</li>
+		</ol>
+	</div>
 </body>
 
 </html>

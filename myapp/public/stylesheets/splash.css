@@ -1,0 +1,29 @@
+.middle {
+    background-color: grey;
+    width: 30%;
+    float: left;
+    margin:auto;
+    text-align: center;
+    color: white;
+}
+
+.left {
+    background-color: white;
+    width: 35%;
+    text-align: center;
+    float:left;
+    color:grey;
+}
+
+
+.right {
+    background-color: white;
+    width: 35%;
+    text-align: center;
+    float: right;
+    color:grey;
+}
+
+body {
+    background-color: grey;
+}
