@@ -138,9 +138,9 @@ function generateBoard() {
 }
 
 function draw() {
-	var size = $('board-table').height();
+	var size = $('#board-table').height();
 	var square = (1/8) * size;
-	var half = (1/2) * size;
+	var half = (1/2) * square;
 	for (var y = 0; y < 8; y++) {
 		for (var x = 0; x < 8; x++) {
 			var canvas = $("#canv_" + x + "" + y)[0]
