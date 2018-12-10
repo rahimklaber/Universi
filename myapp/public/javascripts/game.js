@@ -296,14 +296,6 @@
 		}
 		return -1
 	}
-
-	exports.getOngoingGamesCount = function (games) {
-		var count = 0
-		for (let i = 0; i < games.lenght; i++) {
-			if (typeof (games[i]) !== "undefined") count++
-		}
-		return count
-	}
 	exports.getOngoingGames = getOngoingGames
 
 	function getOngoingGames(games) {
