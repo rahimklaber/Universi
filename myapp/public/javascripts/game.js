@@ -6,7 +6,7 @@
 	exports.gameStats = function (games, gamesCompleted, users) {
 		this.ongoingGames = getOngoingGames(games)
 		this.ongoingGamesCount = this.ongoingGames.length
-		this.playersOnline = this.ongoingGamesCount * 2 + getNotStartedGames(games)
+		this.playersOnline = this.ongoingGamesCount * 2 + getNotStartedGames(games).length
 		this.gamesCompleted = gamesCompleted.nr
 		this.leaderboards = getLeaderBoards(users)
 	}
