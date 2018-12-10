@@ -5,14 +5,17 @@
   box-sizing: border-box;
   cursor: pointer;
   text-align: center;
-  position: relative;
   font-size: 1rem;
   font-weight: 700;
+  width: 150px;
+  height: 35px;
+  margin-bottom: 12px;
+  display: block;
 }
 
 .buttons:hover {
   background-color: black;
-  color: rgb(158, 158, 158);
+  color: rgb(209, 209, 209);
 }
 
 body {

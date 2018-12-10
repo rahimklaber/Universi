@@ -1,0 +1,18 @@
+.sec {
+  display: inline-block;
+}
+
+.stats {
+  border: 1px solid black;
+  border-radius: 28px;
+  display: inline-block;
+  background-color: rgb(209, 209, 209);
+  text-align: center;
+  width: 400px;
+  height: 80%;
+  margin-left: 25%;
+}
+
+#board-table {
+  height: 40%;
+}
