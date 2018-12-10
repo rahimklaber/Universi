@@ -230,8 +230,13 @@ function home_button() {
 
 function pieces() {
 	var count = gameex.count_pieces(game);
-	var first = getPlayer(playernr).name;
-	var second = getPlayer(otherplayernr).name;
+	if (playernr == 1) {
+		var first = getPlayer(playernr).name;
+		var second = getPlayer(otherplayernr).name;
+	} else {
+		var second = getPlayer(playernr).name;
+		var first = getPlayer(otherplayernr).name;
+	}
 	$('#player1_pieces').text(first + ' pieces: ' + count[0]);
 	$('#player2_pieces').text(second + ' pieces: ' + count[1]);
 }
