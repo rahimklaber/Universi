@@ -1,24 +1,26 @@
 .middle {
     background-color: grey;
-    width: 30%;
     float: left;
     margin:auto;
+    width: 36%;
     text-align: center;
     color: white;
 }
 
 .left {
     background-color: white;
-    width: 35%;
+    width: 31%;
     text-align: center;
     float:left;
     color:grey;
+    margin: auto;
 }
 
 
 .right {
     background-color: white;
-    width: 35%;
+    margin: auto;
+    width: 31%;
     text-align: center;
     float: right;
     color:grey;
