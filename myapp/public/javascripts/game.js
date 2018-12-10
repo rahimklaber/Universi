@@ -1,9 +1,9 @@
 (function (exports) {
-	exports.leaderboardsEntry = function(name){
-		this.name = name 
+	exports.leaderboardsEntry = function (name) {
+		this.name = name
 		this.wins = 0
 	}
-	exports.gameStats = function (games, gamesCompleted,users) {
+	exports.gameStats = function (games, gamesCompleted, users) {
 		this.ongoingGames = getOngoingGames(games)
 		this.ongoingGamesCount = this.ongoingGames.length
 		this.playersOnline = this.ongoingGamesCount * 2
@@ -281,9 +281,10 @@
 
 	exports.getGameIdWithWs = function (games, ws) {
 		for (let i = 0; i < games.length; i++) {
-			if (typeof (games[i]) == 'undefined') continue
-			if (games[i].player1.socket == ws || games[i].player2.socket == ws) {
-				return i
+			if (i in games) {
+				if (games[i].player1.socket == ws || games[i].player2.socket == ws) {
+					return i
+				}
 			}
 		}
 		return -1
@@ -309,11 +310,12 @@
 		}
 		return ongoingGames
 	}
+
 	function getLeaderBoards(users) {
 		var leaderboards = []
 		for (let key in users) {
 			if (users.hasOwnProperty(key)) {
-				leaderboards.push([key,users[key].wins])
+				leaderboards.push([key, users[key].wins])
 			}
 		}
 		leaderboards.sort(function (a, b) {
