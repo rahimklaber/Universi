@@ -1,4 +1,20 @@
-var name = prompt("enter a name")
+var name
+if (document.cookie.length == 0) {
+	name = prompt("enter your screenname")
+	let date = new Date()
+	date.setTime(date.getTime() + (10000000))
+	document.cookie = "name=" + name + ";expires=" + date.toUTCString()
+	document.cookie = "times_accessed=1;expires=" + date.toUTCString()
+} else {
+	let date = new Date()
+	date.setTime(date.getTime() + (10000000))
+	let cookie = document.cookie.split(";")
+	name = cookie[0].split("=")[1]
+	let times_accessed = parseInt(cookie[1].split("=")[1], 10) + 1
+	document.cookie = "name=" + name + ";expires=" + date.toUTCString()
+	document.cookie = "times_accessed=" + times_accessed + ";expires=" + date.toUTCString()
+
+}
 var socket = new WebSocket("ws://localhost:80")
 var game
 var playernr
@@ -149,10 +165,10 @@ function draw() {
 }
 
 function handleclick(x, y) {
-	if(socket.readyState == 3) return
+	if (socket.readyState == 3) return
 	if (game == null) return alert("waiting for second player")
 	if (getPlayer(playernr).turn == true) {
-		if (!gameex.valid_move(game,x,y,playernr)) return alert("invalid move")
+		if (!gameex.valid_move(game, x, y, playernr)) return alert("invalid move")
 		socket.send(JSON.stringify([game.id, [x, y], playernr]))
 	} else {
 		alert("not ur turn")
@@ -163,50 +179,53 @@ function handlehover(x, y) {
 	// $("#cell_" + x + "" + y + "").effect("highlight",{color : "white"},100)
 }
 
-function Timer(){
-    timer = setTimeout(function(){
-        seconds++;
-    if(seconds > 59){seconds = 0;minutes++;
+function Timer() {
+	timer = setTimeout(function () {
+		seconds++;
+		if (seconds > 59) {
+			seconds = 0;
+			minutes++;
 
-    if(minutes < 10) {
-        $('#minutes').text('0' + minutes + ':');}
-         else $('#minutes').text(minutes + ':');
-    }
+			if (minutes < 10) {
+				$('#minutes').text('0' + minutes + ':');
+			} else $('#minutes').text(minutes + ':');
+		}
 
-    if(seconds < 10) {
-        $('#seconds').text('0' + seconds);} else {
-        $('#seconds').text(seconds);
-    }
-        Timer();
-    }, 1000);
+		if (seconds < 10) {
+			$('#seconds').text('0' + seconds);
+		} else {
+			$('#seconds').text(seconds);
+		}
+		Timer();
+	}, 1000);
 }
 
-function playercolor(){
-	if(playernr == 1) {
-		$('#player_color').text('Your color is white');}
-		 else $('#player_color').text('Your color is black');
+function playercolor() {
+	if (playernr == 1) {
+		$('#player_color').text('Your color is white');
+	} else $('#player_color').text('Your color is black');
 }
 
 function forfeit_button() {
-    if(socket.readyState == 3) {
-        alert("The game is over or you forfeitted. Please click the home button to go back to the homescreen.");
-    } else 
-        var r = confirm("Are you sure you want to forfeit?");
-        if (r == true) {
-			console.log("Closing socket");
-			socket.close();
-			clearTimeout(timer);
-			$('#turn').text("You forfeitted the game.");
-		} else {
-			console.log("Nothing");
-		}
+	if (socket.readyState == 3) {
+		alert("The game is over or you forfeitted. Please click the home button to go back to the homescreen.");
+	} else
+		var r = confirm("Are you sure you want to forfeit?");
+	if (r == true) {
+		console.log("Closing socket");
+		socket.close();
+		clearTimeout(timer);
+		$('#turn').text("You forfeitted the game.");
+	} else {
+		console.log("Nothing");
+	}
 };
 
 function home_button() {
-	if(socket.readyState == 3) {
-        document.location.href="/";
-	} else 
-	alert("The game is still going on. You can only go to the homescreen if the game is over, or if you forfeit the ongoing game.");
+	if (socket.readyState == 3) {
+		document.location.href = "/";
+	} else
+		alert("The game is still going on. You can only go to the homescreen if the game is over, or if you forfeit the ongoing game.");
 };
 
 function pieces() {
