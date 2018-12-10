@@ -138,27 +138,30 @@ function generateBoard() {
 }
 
 function draw() {
+	var size = $('board-table').height();
+	var square = (1/8) * size;
+	var half = (1/2) * size;
 	for (var y = 0; y < 8; y++) {
 		for (var x = 0; x < 8; x++) {
 			var canvas = $("#canv_" + x + "" + y)[0]
 			var ctx = canvas.getContext("2d")
 			if (game.board[x][y] == 1) {
 				ctx.fillStyle = "green"
-				ctx.fillRect(0, 0, 100, 100)
+				ctx.fillRect(0, 0, square, square)
 				ctx.beginPath()
 				ctx.fillStyle = "white"
-				ctx.arc(50, 50, 50, 0, 2 * Math.PI)
+				ctx.arc(half, half, half, 0, 2 * Math.PI)
 				ctx.fill()
 			} else if (game.board[x][y] == 2) {
 				ctx.fillStyle = "green"
-				ctx.fillRect(0, 0, 100, 100)
+				ctx.fillRect(0, 0, square, square)
 				ctx.beginPath()
 				ctx.fillStyle = "black"
-				ctx.arc(50, 50, 50, 0, 2 * Math.PI)
+				ctx.arc(half, half, half, 0, 2 * Math.PI)
 				ctx.fill()
 			} else {
 				ctx.fillStyle = "green"
-				ctx.fillRect(0, 0, 100, 100)
+				ctx.fillRect(0, 0, square, square)
 			}
 		}
 	}
