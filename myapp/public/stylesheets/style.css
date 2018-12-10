@@ -11,8 +11,19 @@
   height: 35px;
   margin-bottom: 12px;
   display: block;
+  margin: auto;
+}
+.buttons:active{
+  background-color: cadetblue; 
 }
 
+.stats {
+  border: 1px solid black;
+  border-radius: 28px;
+  display: inline-block;
+  background-color: rgb(209, 209, 209);
+  text-align: center;
+}
 .buttons:hover {
   background-color: black;
   color: rgb(209, 209, 209);
