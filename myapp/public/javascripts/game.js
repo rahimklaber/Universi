@@ -6,7 +6,7 @@
 	exports.gameStats = function (games, gamesCompleted, users) {
 		this.ongoingGames = getOngoingGames(games)
 		this.ongoingGamesCount = this.ongoingGames.length
-		this.playersOnline = this.ongoingGamesCount * 2
+		this.playersOnline = this.ongoingGamesCount * 2 + getNotStartedGames(games)
 		this.gamesCompleted = gamesCompleted.nr
 		this.leaderboards = getLeaderBoards(users)
 	}
@@ -308,6 +308,19 @@
 			}
 		}
 		return ongoingGames
+	}
+
+	function getNotStartedGames(games) {
+		var notStarted = []
+		for (let i = 0; i < games.length; i++) {
+			if (i in games) {
+				if (games[i].gamestate == 0) {
+					notStarted.push(games[i])
+					console.log("pushed")
+				}
+			}
+		}
+		return notStarted
 	}
 
 	function getLeaderBoards(users) {
