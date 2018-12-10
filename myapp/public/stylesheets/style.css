@@ -1,8 +1,20 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.buttons {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius:28px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
-a {
-  color: #00B7FF;
+.buttons:hover {
+  background-color: black;
+  color: rgb(158, 158, 158);
+}
+
+body {
+  background-color: rgb(158, 158, 158);
 }
