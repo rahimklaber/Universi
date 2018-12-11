@@ -3,8 +3,8 @@ if (document.cookie.length == 0) {
 	name = prompt("enter your screenname")
 	let date = new Date()
 	date.setTime(date.getTime() + (10000000))
-	document.cookie = "name=" + name + ";expires=" + date.toUTCString()
-	document.cookie = "times_accessed=1;expires=" + date.toUTCString()
+	document.cookie = "name=" + name + "; expires=" + date.toUTCString()
+	document.cookie = "times_accessed=1; expires=" + date.toUTCString()
 } else {
 	let date = new Date()
 	date.setTime(date.getTime() + (10000000))
