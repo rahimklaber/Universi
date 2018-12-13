@@ -42,7 +42,7 @@ td{
 }
 
 .bottom {
+  padding: 7vh;
   position: absolute;
-  bottom: 3vh;
-  margin-left: 7vh; 
+  bottom: 0vh;
 }
