@@ -1,31 +1,75 @@
 .middle {
     background-color: grey;
     float: left;
-    margin:auto;
-    width: 36%;
+    position: absolute;
+    left: 35vw;
+    width: 30vw;
+    padding: 20px;
     text-align: center;
     color: white;
 }
 
 .left {
     background-color: white;
-    width: 31%;
+    width: 20vw;
     text-align: center;
-    float:left;
-    color:grey;
-    margin: auto;
+    float: left;
+    color: grey;
+    top: 5vh;
+    position: relative;
+    margin-left: 10vw;
+    min-height: 420px;
+    max-height: 420px;
 }
-
 
 .right {
     background-color: white;
-    margin: auto;
-    width: 31%;
+    width: 20vw;
     text-align: center;
     float: right;
-    color:grey;
+    color: grey;
+    top: 5vh;
+    margin-right: 10vw;
+    position: relative;
+}
+
+.entries {}
+
+.ongoing::before,.ongoing::after {
+    content: "⚔️"
 }
 
 body {
     background-color: grey;
+}
+
+.top-ten::before, .top-ten::after {
+    content: "🏅"
+}
+
+.nr-1::before, .nr-1::after {
+    content: "🥇"
+}
+
+.nr-2::before, .nr-2::after {
+    content: "🥈"
+}
+
+
+.nr-3::before, .nr-3::after {
+    content: "🥉"
+}
+
+
+@keyframes flicker{
+     0%, 100%{
+        opacity: 0.99;
+    }
+    50%{
+        opacity: 0.3;
+    }
+}
+
+.ongoing::before,.ongoing::after{
+    animation: flicker 0.5s linear infinite;
 }
