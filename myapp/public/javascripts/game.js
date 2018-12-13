@@ -303,7 +303,7 @@
 		console.log(games)
 		for (let i = 0; i < games.length; i++) {
 			if (i in games) {
-				if (games[i].gamestate == 0) {
+				if (games[i].gamestate == 1) {
 					ongoingGames.push(games[i])
 					console.log("pushed")
 				}
