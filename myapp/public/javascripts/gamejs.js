@@ -1,6 +1,6 @@
 var name
 var first_time
-var socket = new WebSocket("ws://192.168.0.199:80")
+var socket = new WebSocket("ws://localhost")
 var game
 var playernr
 var otherplayernr
