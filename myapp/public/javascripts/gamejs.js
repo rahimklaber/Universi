@@ -14,11 +14,23 @@ socket.onopen = function (event) {
 	socket.onmessage = function (event) {
 		let data = JSON.parse(event.data)
 		switch (data.message) {
+			case "name-invalid":{
+				setName("name allready taken, enter new name")
+				socket.send(JSON.stringify({
+					first_time : first_time,
+					message: "name",
+					name: name,
+					id: data.id,
+					playernr: playernr
+				}))
+
+			}
 			case "name":
-				//todo add otherplayernr
+				setName("enter a screen ")
 				playernr = data.playernr
 				otherplayernr = 3 - playernr
 				socket.send(JSON.stringify({
+					first_time : first_time,
 					message: "name",
 					name: name,
 					id: data.id,
@@ -117,7 +129,7 @@ function generateBoard() {
 		$("#board-table").append("<tr id=row" + y + "" + "><tr")
 		for (var x = 0; x < 8; x++) {
 			$("#row" + y).append("<td id=cell_" + x + "" + y + "></td>")
-			$("#cell_" + x + "" + y).append("<canvas  onclick=handleclick(" + x + "," + y + ") height=100% width=100% onmouseover=handlehover(" + x + "," + y + ")  id=canv_" + x + "" + y + "></canvas>")
+			$("#cell_" + x + "" + y).append("<canvas  onclick=handleclick(" + x + "," + y + ") onmouseover=handlehover(" + x + "," + y + ")  id=canv_" + x + "" + y + "></canvas>")
 		}
 	}
 }
@@ -127,7 +139,7 @@ function draw() {
 	console.log(size)
 	var square = (1 / 8) * size;
 	console.log(square)
-	var half = (1 / 2) * square -1;
+	var half = (1 / 2) * square;
 	console.log(half)
 	for (var y = 0; y < 8; y++) {
 		for (var x = 0; x < 8; x++) {
@@ -235,6 +247,7 @@ function pieces() {
 }
 
 function setName(message) {
+	console.log(document.cookie.length)
 	if (document.cookie.length == 0) {
 		first_time = true
 		name = prompt(message)
