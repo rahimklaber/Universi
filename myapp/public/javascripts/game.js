@@ -287,7 +287,7 @@
 						return i
 					}
 				}
-				if (typeof (games[i].player2) != "undefined" && games[i].player1 != null) {
+				if (typeof (games[i].player2) != "undefined" && games[i].player2 != null) {
 					if (games[i].player2.socket == ws) {
 						return i
 					}
