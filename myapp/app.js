@@ -29,6 +29,7 @@ app.set("view engine", "ejs")
 app.get("/", function (req, res) {
 	let stats = new gameStats(games, gamesCompleted, users)
 	console.log(stats)
+	console.log(req.cookies)
 	let times_accessed = req.cookies["times_accessed"]
 	console.log(times_accessed)
 	res.render("splash.ejs", {gameStats: stats, times_accessed: times_accessed})
@@ -68,11 +69,21 @@ wss.on("connection", function (ws) {
 
 		if (data.message == "name") {
 			if (data.playernr == 1) {
+				if(data.first_time){
+					if(typeof (users[data.name]) == "undefined"){
+						return games[data.id].player1.socket.send(JSON.stringify({message: "name-invalid"}))
+					}
+				}
 				games[data.id].player1.name = data.name
 				if (typeof (users[data.name]) == "undefined") {
 					users[data.name] = new leaderboardsEntry(data.name)
 				}
 			} else {
+				if(data.first_time){
+					if(typeof (users[data.name]) == "undefined"){
+						return games[data.id].player2.socket.send(JSON.stringify({message: "name-invalid"}))
+					}
+				}
 				games[data.id].player2.name = data.name
 				if (typeof (users[data.name]) == "undefined") {
 					users[data.name] = new leaderboardsEntry(data.name)
