@@ -3,8 +3,8 @@
         <script  src="javascripts/game.js"></script>
         <script  src="javascripts/gamejs.js"></script>
 <head>
-    <link rel = "stylesheet" type = "text/css" href = "stylesheets/game.css" />
     <link rel = "stylesheet" type = "text/css" href = "stylesheets/style.css" />
+    <link rel = "stylesheet" type = "text/css" href = "stylesheets/game.css" />
     <title>Universi</title>
 </head>
 
@@ -24,10 +24,11 @@
             <p id="player1_pieces">Player 1 pieces: 2</p>
             <p id="player2_pieces">Player 2 pieces: 2</p>
             <p id="turn"></p>
-
-            <button onclick="forfeit_button()" id="forfeit" class="buttons">Forfeit</button>
-            <br>
-            <button onclick="home_button()" id="home" class="buttons">Home</button>
+                <div class="buttons">
+                <button onclick="forfeit_button()" id="forfeit" class="buttons">Forfeit</button>
+                <br>
+                <button onclick="home_button()" id="home" class="buttons">Home</button>
+                </div>
         </div>
     </div>
 </body>

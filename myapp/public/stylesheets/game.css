@@ -1,36 +1,37 @@
 
-
 body {
-    line-height: 1;
+  background-color: black;
 }
-ol, ul {
-    list-style: none;}
 .sec {
-  display: inline-block;
+    line-height: 1;
+    background-color: grey;
+    border: 2px solid black;
+    border-radius: 28px;
+    width: calc(30vh + 48vh + 10vh);
+    height: 50vh;
+    padding: 7vh;
 }
-table{
-  height: 50vh;
-  width: 50vh;
-}
+
 canvas{
-  height: 100%;
-  width: 100%;
+  height: 6vh;
+  width: 6vh;
 }
 
 .stats {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 28px;
-  display: inline-block;
   background-color: rgb(209, 209, 209);
   text-align: center;
-  width: 400px;
-  height: 80%;
-  margin-left: 25%;
+  width: 30vh;
+  height: 49vh;
+  float: left;
+  margin-left: 7vh;
 }
 
 #board-table {
-  height: 33vh;
-  
+  float: left;
+  height: 48vh;
+  width: 48vh;
 }
 
 td{
@@ -38,3 +39,5 @@ td{
   border: 1px solid black;
   padding: 0;
 }
+
+
