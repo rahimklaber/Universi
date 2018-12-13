@@ -1,20 +1,5 @@
 var name
-if (document.cookie.length == 0) {
-	name = prompt("enter your screenname")
-	let date = new Date()
-	date.setTime(date.getTime() + (10000000))
-	document.cookie = "name=" + name + "; expires=" + date.toUTCString()
-	document.cookie = "times_accessed=1; expires=" + date.toUTCString()
-} else {
-	let date = new Date()
-	date.setTime(date.getTime() + (10000000))
-	let cookie = document.cookie.split(";")
-	name = cookie[0].split("=")[1]
-	let times_accessed = parseInt(cookie[1].split("=")[1], 10) + 1
-	document.cookie = "name=" + name + ";expires=" + date.toUTCString()
-	document.cookie = "times_accessed=" + times_accessed + ";expires=" + date.toUTCString()
-
-}
+var first_time
 var socket = new WebSocket("ws://localhost:80")
 var game
 var playernr
@@ -132,18 +117,23 @@ function generateBoard() {
 		$("#board-table").append("<tr id=row" + y + "" + "><tr")
 		for (var x = 0; x < 8; x++) {
 			$("#row" + y).append("<td id=cell_" + x + "" + y + "></td>")
-			$("#cell_" + x + "" + y).append("<canvas height=100% onclick=handleclick(" + x + "," + y + ") onmouseover=handlehover(" + x + "," + y + ") width =100% id=canv_" + x + "" + y + "></canvas>")
+			$("#cell_" + x + "" + y).append("<canvas  onclick=handleclick(" + x + "," + y + ") height=100% width=100% onmouseover=handlehover(" + x + "," + y + ")  id=canv_" + x + "" + y + "></canvas>")
 		}
 	}
 }
 
 function draw() {
 	var size = $('#board-table').height();
-	var square = (1/8) * size;
-	var half = (1/2) * square;
+	console.log(size)
+	var square = (1 / 8) * size;
+	console.log(square)
+	var half = (1 / 2) * square -1;
+	console.log(half)
 	for (var y = 0; y < 8; y++) {
 		for (var x = 0; x < 8; x++) {
 			var canvas = $("#canv_" + x + "" + y)[0]
+			canvas.setAttribute('width', square);
+			canvas.setAttribute('height', square);
 			var ctx = canvas.getContext("2d")
 			if (game.board[x][y] == 1) {
 				ctx.fillStyle = "green"
@@ -242,4 +232,25 @@ function pieces() {
 	}
 	$('#player1_pieces').text(first + ' pieces: ' + count[0]);
 	$('#player2_pieces').text(second + ' pieces: ' + count[1]);
+}
+
+function setName(message) {
+	if (document.cookie.length == 0) {
+		first_time = true
+		name = prompt(message)
+		let date = new Date()
+		date.setTime(date.getTime() + (10000000))
+		document.cookie = "name=" + name + "; expires=" + date.toUTCString()
+		document.cookie = "times_accessed=1; expires=" + date.toUTCString()
+	} else {
+		first_time=false
+		let date = new Date()
+		date.setTime(date.getTime() + (10000000))
+		let cookie = document.cookie.split(";")
+		name = cookie[0].split("=")[1]
+		let times_accessed = parseInt(cookie[1].split("=")[1], 10) + 1
+		document.cookie = "name=" + name + ";expires=" + date.toUTCString()
+		document.cookie = "times_accessed=" + times_accessed + ";expires=" + date.toUTCString()
+
+	}
 }
