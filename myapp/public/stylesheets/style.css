@@ -12,6 +12,7 @@
   margin-bottom: 12px;
   display: block;
   margin: auto;
+  transition: background-color 2s 
 }
 .buttons:active{
   background-color: cadetblue; 
@@ -27,7 +28,6 @@
 .buttons:hover {
   background-color: black;
   color: rgb(209, 209, 209);
-  transition: background-color 2s
 }
 
 body {
