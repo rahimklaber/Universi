@@ -1,6 +1,6 @@
 var name
 var first_time
-var socket = new WebSocket("ws://localhost:80")
+var socket = new WebSocket("ws://192.168.0.199:80")
 var game
 var playernr
 var otherplayernr
@@ -251,19 +251,15 @@ function setName(message) {
 	if (document.cookie.length == 0) {
 		first_time = true
 		name = prompt(message)
-		let date = new Date()
-		date.setTime(date.getTime() + (10000000))
-		document.cookie = "name=" + name + "; expires=" + date.toUTCString()
-		document.cookie = "times_accessed=1; expires=" + date.toUTCString()
+		document.cookie = "name=" + name + "; max-age=" +1000000000
+		document.cookie = "times_accessed=1; max-age=" + 1000000000
 	} else {
 		first_time=false
-		let date = new Date()
-		date.setTime(date.getTime() + (10000000))
 		let cookie = document.cookie.split(";")
 		name = cookie[0].split("=")[1]
 		let times_accessed = parseInt(cookie[1].split("=")[1], 10) + 1
-		document.cookie = "name=" + name + ";expires=" + date.toUTCString()
-		document.cookie = "times_accessed=" + times_accessed + ";expires=" + date.toUTCString()
+		document.cookie = "name=" + name + ";max-age=" + 1000000000
+		document.cookie = "times_accessed=" + times_accessed + ";max-age=" + 1000000000
 
 	}
 }

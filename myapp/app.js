@@ -70,17 +70,18 @@ wss.on("connection", function (ws) {
 		if (data.message == "name") {
 			if (data.playernr == 1) {
 				if(data.first_time){
-					if(typeof (users[data.name]) == "undefined"){
+					if(typeof (users[data.name]) != "undefined"){
 						return games[data.id].player1.socket.send(JSON.stringify({message: "name-invalid"}))
 					}
 				}
+				console.log(games[data.id])
 				games[data.id].player1.name = data.name
 				if (typeof (users[data.name]) == "undefined") {
 					users[data.name] = new leaderboardsEntry(data.name)
 				}
 			} else {
 				if(data.first_time){
-					if(typeof (users[data.name]) == "undefined"){
+					if(typeof (users[data.name]) != "undefined"){
 						return games[data.id].player2.socket.send(JSON.stringify({message: "name-invalid"}))
 					}
 				}
@@ -120,7 +121,7 @@ wss.on("connection", function (ws) {
 	})
 
 	for (let i = 0; i < games.length; i++) {
-		if (typeof (games[i]) == 'undefined') continue
+		if (!(i in games)) continue
 		if (games[i].player2 == null) {
 
 			games[i].player2 = new player(ws)
