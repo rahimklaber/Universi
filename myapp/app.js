@@ -4,13 +4,9 @@ var websocket = require("ws")
 var game = require("./public/javascripts/game").game
 var player = require("./public/javascripts/game").player
 var checkmove = require("./public/javascripts/game").checkmove
-var valid_move = require("./public/javascripts/game").valid_move
-var count_pieces = require("./public/javascripts/game").count_pieces
-var move_possible = require("./public/javascripts/game").move_possible
 var cookies = require("cookie-parser")
 var cookie_secret = require("./cookie-secret").secret
 var getGameWithIdWs = require("./public/javascripts/game").getGameIdWithWs
-var getOngoingGames = require("./public/javascripts/game").getOngoingGames
 var gameStats = require("./public/javascripts/game").gameStats
 var leaderboardsEntry = require("./public/javascripts/game").leaderboardsEntry
 // var getLeaderboards =
@@ -28,13 +24,14 @@ var server = http.createServer(app)
 const wss = new websocket.Server({
 	server
 })
+app.set("view engine", "ejs")
 
 app.get("/", function (req, res) {
 	let stats = new gameStats(games, gamesCompleted, users)
 	console.log(stats)
-	res.sendFile("splash.html", {
-		root: "./public"
-	})
+	let times_accessed = req.cookies["times_accessed"]
+	console.log(times_accessed)
+	res.render("splash.ejs", {gameStats: stats, times_accessed: times_accessed})
 })
 
 app.get("/play", function (req, res) {

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+	<link rel="stylesheet" type="text/css" href="stylesheets/splash.css" />
+</head>
+
+<body>
+
+
+	<div class="left stats">
+	<div >
+		<p class="ongoing-title"><b>Ongoing games</b></p>
+		<%for(let i =0;i<gameStats.ongoingGames.length;i++){%>
+		<p class="ongoing"><%=gameStats.ongoingGames[i].player1.name%> vs <%=gameStats.ongoingGames[i].player2.name%></p>
+		
+		<%}
+		%>
+		</div>
+	</div>
+	<div class="middle">
+		<h1>Universi</h1>
+		<p>One of the world's most popular board games since 1883</p>
+		<br>
+		<p><%=gameStats.ongoingGamesCount%> ongoing game(s)</p>
+		<p><%=gameStats.playersOnline%> person(s) online</p>
+		<p><%=gameStats.gamesCompleted%> game(s) completed</p>
+		<p>you have accessed the game <%=times_accessed%> times</p>
+
+		<form action="/play">
+			<button class="buttons">Join a game</button>
+		</form>
+		<br>
+		<button id="how-but" class="buttons">How to play</button>
+		<div id = "how-to">
+		<h3>How To Play</h3>
+		<p>You have to click on an empty tile to place your piece, there must only be pieces of the opposite color between the tile where you placed your piece and another of you pieces, if not the move will be rejected.</p>
+		<p>all of the opponents pieces that were between one of your pieces and the tile where you placed your pieced will become yours.</p>
+	 	<p>The game ends when there are no more moves available and you win if you have more pieces that your opponenent.
+		</p>
+		</div>
+	</div>
+	<div class="right stats">
+	<div class="entries">
+		<p><b>Leaderboards</b></p>
+        <% for(let i=0;i<10;i++){
+            if(i ==0){
+				if(typeof(gameStats.leaderboards[i]) =='undefined'){break}
+			%>
+                <p class="nr-1"><%=gameStats.leaderboards[i][0]%></p>
+            <%}else if (i == 1){if(typeof(gameStats.leaderboards[i]) =='undefined'){break}%>
+                <p class="nr-2"><%=gameStats.leaderboards[i][0]%></p>
+
+            
+            <%}else if (i == 2){if(typeof(gameStats.leaderboards[i]) =='undefined'){break}%>
+                <p class="nr-3"><%=gameStats.leaderboards[i][0]%></p>
+
+            <%}else{if(typeof(gameStats.leaderboards[i]) =='undefined'){break}%>
+                <p class="top-ten"><%=gameStats.leaderboards[i][0]%></p>
+            <%}}%>
+		</div>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script  src="javascripts/splash.js"></script>
+</html>

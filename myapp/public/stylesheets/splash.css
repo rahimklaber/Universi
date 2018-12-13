@@ -2,13 +2,16 @@
     background-color: grey;
     float: left;
     position: absolute;
-    left: 35vw;
+    left: 34vw;
     width: 30vw;
-    padding: 20px;
+    padding-left: 1vw;
     text-align: center;
     color: white;
 }
-
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
 .left {
     background-color: white;
     width: 20vw;
@@ -19,6 +22,7 @@
     position: relative;
     margin-left: 10vw;
     min-height: 420px;
+    overflow:auto;
     max-height: 420px;
 }
 
@@ -30,6 +34,8 @@
     color: grey;
     top: 5vh;
     margin-right: 10vw;
+    min-height: 420px;
+    max-height: 420px;
     position: relative;
 }
 
