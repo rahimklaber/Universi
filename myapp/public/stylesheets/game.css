@@ -3,6 +3,7 @@ body {
   background-color: black;
 }
 .sec {
+    margin: 0 auto;
     line-height: 1;
     background-color: grey;
     border: 2px solid black;
