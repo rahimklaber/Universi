@@ -26,6 +26,7 @@ canvas{
   height: 49vh;
   float: left;
   margin-left: 7vh;
+  position: relative;
 }
 
 #board-table {
@@ -40,4 +41,8 @@ td{
   padding: 0;
 }
 
-
+.bottom {
+  position: absolute;
+  bottom: 3vh;
+  margin-left: 7vh; 
+}
