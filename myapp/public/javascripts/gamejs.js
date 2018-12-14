@@ -15,24 +15,25 @@ socket.onopen = function (event) {
 	socket.onmessage = function (event) {
 		let data = JSON.parse(event.data)
 		switch (data.message) {
-			case "name-invalid":{
-				invalid_name_count++
-				setName("That name is already taken,  please enter a new name!")
-				socket.send(JSON.stringify({
-					first_time : first_time,
-					message: "name",
-					name: name,
-					id: data.id,
-					playernr: playernr
-				}))
-				break
-			}
+			case "name-invalid":
+				{
+					invalid_name_count++
+					setName("That name is already taken,  please enter a new name!")
+					socket.send(JSON.stringify({
+						first_time: first_time,
+						message: "name",
+						name: name,
+						id: data.id,
+						playernr: playernr
+					}))
+					break
+				}
 			case "name":
 				setName("Please enter a screenname.")
 				playernr = data.playernr
 				otherplayernr = 3 - playernr
 				socket.send(JSON.stringify({
-					first_time : first_time,
+					first_time: first_time,
 					message: "name",
 					name: name,
 					id: data.id,
@@ -250,21 +251,20 @@ function pieces() {
 
 function setName(message) {
 	console.log(document.cookie.length)
-	if (document.cookie.length == 0 ) {
+	if (document.cookie.length == 0) {
 		first_time = true
 		name = prompt(message)
-		document.cookie = "name=" + name + "; max-age=" +1000000000
+		document.cookie = "name=" + name + "; max-age=" + 1000000000
 		document.cookie = "times_accessed=1; max-age=" + 1000000000
-	}else if(invalid_name_count != 0){
+	} else if (invalid_name_count != 0) {
 		first_time = true
 		let cookie = document.cookie.split(";")
 		let times_accessed = parseInt(cookie[1].split("=")[1], 10) + 1
 		name = prompt(message)
-		document.cookie = "name=" + name + "; max-age=" +1000000000
-		document.cookie = "times_accessed="+times_accessed+"; max-age=" + 1000000000
-	} 
-	else {
-		first_time=false
+		document.cookie = "name=" + name + "; max-age=" + 1000000000
+		document.cookie = "times_accessed=" + times_accessed + "; max-age=" + 1000000000
+	} else {
+		first_time = false
 		let cookie = document.cookie.split(";")
 		name = cookie[0].split("=")[1]
 		let times_accessed = parseInt(cookie[1].split("=")[1], 10) + 1
@@ -272,4 +272,19 @@ function setName(message) {
 		document.cookie = "times_accessed=" + times_accessed + "; max-age=" + 1000000000
 
 	}
+}
+
+function fullscreen() {
+	var elem = document.documentElement;
+
+	if (elem.requestFullscreen) {
+		elem.requestFullscreen();
+	} else if (elem.mozRequestFullScreen) { /* Firefox */
+		elem.mozRequestFullScreen();
+	} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+		elem.webkitRequestFullscreen();
+	} else if (elem.msRequestFullscreen) { /* IE/Edge */
+		elem.msRequestFullscreen();
+	}
+
 }

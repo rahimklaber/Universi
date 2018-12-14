@@ -12,7 +12,25 @@ body {
     height: 50vh;
     padding: 7vh;
 }
-
+.sec:fullscreen {
+  margin: 0 auto;
+  line-height: 1;
+  background-color: grey;
+  border: 2px solid black;
+  border-radius: 28px;
+  width: calc(30vh + 48vh + 10vh);
+  height: 100vh;
+  padding: 7vh;
+}
+canvas:fullscreen{
+  height: 10vh;
+  width: 10vh;
+}
+#board-table:fullscreen {
+  float: left;
+  height: 80vh;
+  width: 80vh;
+}
 canvas{
   height: 6vh;
   width: 6vh;

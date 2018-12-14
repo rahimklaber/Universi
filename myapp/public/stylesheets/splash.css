@@ -1,7 +1,7 @@
-@media (max-width: 1440px) {
-    @media (max-height: 900px) {
+@media (max-width: 1920px) {
+    @media (max-height: 1080) {
         .warning::after {
-            content: "We officially support resolutions bigger than 1440x900 we cannot guerentee your experience if you use a bad pc";
+            content: "We officially support resolutions bigger than 1920X1080 we cannot guerentee your experience if you use a bad pc";
             color: red;
             height: 500px;
             width: 500px;
