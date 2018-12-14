@@ -1,7 +1,7 @@
 @media (max-width: 1440px) {
     @media (max-height: 900px) {
         .warning::after {
-            content: " We cannot garuentee that you will be able to play the game on ur bad resolution";
+            content: "We officially support resolutions bigger than 1440x900 we cannot guerentee your experience if you use a bad pc";
             color: red;
             height: 500px;
             width: 500px;

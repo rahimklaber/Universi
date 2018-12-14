@@ -31,6 +31,7 @@ app.get("/", function (req, res) {
 	console.log(stats)
 	console.log(req.cookies)
 	let times_accessed = req.cookies["times_accessed"]
+	if(times_accessed == null) times_accessed = 0
 	console.log(times_accessed)
 	res.render("splash.ejs", {gameStats: stats, times_accessed: times_accessed})
 })
