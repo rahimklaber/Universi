@@ -46,3 +46,31 @@ td{
   position: relative;
   margin-top: 17vh;
 }
+
+#elapsedtime::before {
+  content: "⏳"
+}
+
+#player_color::before {
+  content: "🎡"
+}
+
+#player1_pieces::before {
+  content: "⚪"
+}
+
+#player2_pieces::before {
+  content: "⚫"
+}
+
+#turn::before {
+  content: "↪️"
+}
+
+#players::before {
+  content: "🧔"
+}
+
+#players::after {
+  content: "🙍"
+}

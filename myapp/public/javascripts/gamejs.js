@@ -1,7 +1,7 @@
 var name
 var invalid_name_count = 0
 var first_time
-var socket = new WebSocket("ws://192.168.0.199:80")
+var socket = new WebSocket("ws://localhost")
 var game
 var playernr
 var otherplayernr
@@ -17,7 +17,7 @@ socket.onopen = function (event) {
 		switch (data.message) {
 			case "name-invalid":{
 				invalid_name_count++
-				setName("name allready taken, enter new name")
+				setName("That name is already taken,  please enter a new name!")
 				socket.send(JSON.stringify({
 					first_time : first_time,
 					message: "name",
@@ -28,7 +28,7 @@ socket.onopen = function (event) {
 				break
 			}
 			case "name":
-				setName("enter a screenname ")
+				setName("Please enter a screenname.")
 				playernr = data.playernr
 				otherplayernr = 3 - playernr
 				socket.send(JSON.stringify({
