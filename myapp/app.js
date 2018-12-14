@@ -161,4 +161,4 @@ wss.on("connection", function (ws) {
 
 
 
-server.listen(port)
+server.listen(process.env.PORT || 3000)
