@@ -62,7 +62,7 @@ td{
 
 .bottom {
   position: relative;
-  margin-top: 17vh;
+  margin-top: 10vh;
 }
 
 #elapsedtime::before {
