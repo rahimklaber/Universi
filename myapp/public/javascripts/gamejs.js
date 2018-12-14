@@ -44,15 +44,15 @@ socket.onopen = function (event) {
 				Timer();
 				playercolor();
 				game = data.game
-				$("#players").html(getPlayer(playernr).name + "(you) vs " + getPlayer(otherplayernr).name)
-				if (getPlayer(playernr).turn) $("#turn").html("your turn")
+				$("#players").html(getPlayer(playernr).name + " (you) vs " + getPlayer(otherplayernr).name)
+				if (getPlayer(playernr).turn) $("#turn").html("Your turn")
 				else $("#turn").html(getPlayer(otherplayernr).name + "'s turn")
 				draw()
 				pieces();
 				break
 			case "game-move":
 				game = data.game
-				if (getPlayer(playernr).turn) $("#turn").html("your turn")
+				if (getPlayer(playernr).turn) $("#turn").html("Your turn")
 				else $("#turn").html(getPlayer(otherplayernr).name + "'s turn")
 				draw()
 				pieces();
@@ -60,22 +60,22 @@ socket.onopen = function (event) {
 			case "move-skip":
 				game = data.game
 				if (data.playernr == playernr) $("#turn").html(getPlayer(otherplayernr).name + "'s turn, you had no moves available")
-				else $("#turn").html("your turn," + getPlayer(otherplayernr).name + " had no moves available")
+				else $("#turn").html("Your turn," + getPlayer(otherplayernr).name + " had no moves available")
 				draw()
 				pieces();
 				break
 			case "nomove-end":
 				clearTimeout(timer);
 				game = data.game
-				if (getPlayer(playernr).winner) $("#turn").html("you win, there are no more moves available")
-				else $("#turn").html("you lose, there are no more moves available")
+				if (getPlayer(playernr).winner) $("#turn").html("You win! There are no more more available moves")
+				else $("#turn").html("You lose! There are no more available moves")
 				draw()
 				pieces();
 				break
 			case "nomove-tie":
 				clearTimeout(timer);
 				game = data.game
-				$("#turn").html("it's a tie, there are no more moves available")
+				$("#turn").html("It's a tie, there are no more available moves.")
 				draw()
 				pieces();
 				break
@@ -83,22 +83,22 @@ socket.onopen = function (event) {
 				console.log("end")
 				clearTimeout(timer);
 				game = data.game
-				if (getPlayer(playernr).winner) $("#turn").html("you win")
-				else $("#turn").html("you lose")
+				if (getPlayer(playernr).winner) $("#turn").html("You win!!")
+				else $("#turn").html("You lose!!")
 				draw()
 				pieces();
 				break
 			case "game-tie":
 				clearTimeout(timer);
 				game = data.game
-				$("#turn").html("it's a tie")
+				$("#turn").html("It's a tie!")
 				draw()
 				pieces();
 				break
 			case "aborted":
 				pieces();
 				clearTimeout(timer);
-				$("#turn").html("the other player has aborted")
+				$("#turn").html("The other player has aborted the game.")
 				break
 			default:
 				break
@@ -173,12 +173,12 @@ function draw() {
 
 function handleclick(x, y) {
 	if (socket.readyState == 3) return
-	if (game == null) return alert("waiting for second player")
+	if (game == null) return alert("Waiting for a second player to join...")
 	if (getPlayer(playernr).turn == true) {
-		if (!gameex.valid_move(game, x, y, playernr)) return alert("invalid move")
+		if (!gameex.valid_move(game, x, y, playernr)) return alert("Invalid move!")
 		socket.send(JSON.stringify([game.id, [x, y], playernr]))
 	} else {
-		alert("not ur turn")
+		alert("It is currently not your turn.")
 	}
 }
 
