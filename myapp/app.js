@@ -74,7 +74,7 @@ wss.on("connection", function (ws) {
 					if(typeof (users[data.name]) != "undefined"){
 						console.log(users)
 						return games[data.id].player1.socket.send(JSON.stringify({
-							id: newgame.id,
+							id: data.id,
 							message: "name-invalid",
 							playernr: 1
 						}))
@@ -87,7 +87,7 @@ wss.on("connection", function (ws) {
 			} else {
 				if(data.name in users){
 						return games[data.id].player2.socket.send(JSON.stringify({
-							id: newgame.id,
+							id: data.id,
 							message: "name-invalid",
 							playernr: 2
 						}))
