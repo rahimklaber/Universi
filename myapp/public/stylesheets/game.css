@@ -48,6 +48,9 @@ td{
 }
 
 #elapsedtime::before {
+  animation-name: hourglass;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
   content: "⏳"
 }
 
@@ -73,4 +76,8 @@ td{
 
 #players::after {
   content: "🙍"
+}
+
+@keyframes hourglass {
+  50% {content: "⌛"}
 }
