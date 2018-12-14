@@ -1,7 +1,8 @@
 var name
 var invalid_name_count = 0
 var first_time
-var socket = new WebSocket("wss://universi.heroku.com")
+var host = location.origin.replace(/^http/, 'ws')
+var socket = new WebSocket(host)
 var game
 var playernr
 var otherplayernr
