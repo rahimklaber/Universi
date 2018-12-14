@@ -1,4 +1,5 @@
 var name
+var invalid_name_count = 0
 var first_time
 var socket = new WebSocket("ws://192.168.0.199:80")
 var game
@@ -15,6 +16,7 @@ socket.onopen = function (event) {
 		let data = JSON.parse(event.data)
 		switch (data.message) {
 			case "name-invalid":{
+				invalid_name_count++
 				setName("name allready taken, enter new name")
 				socket.send(JSON.stringify({
 					first_time : first_time,
@@ -23,10 +25,10 @@ socket.onopen = function (event) {
 					id: data.id,
 					playernr: playernr
 				}))
-
+				break
 			}
 			case "name":
-				setName("enter a screen ")
+				setName("enter a screenname ")
 				playernr = data.playernr
 				otherplayernr = 3 - playernr
 				socket.send(JSON.stringify({
@@ -248,12 +250,18 @@ function pieces() {
 
 function setName(message) {
 	console.log(document.cookie.length)
-	if (document.cookie.length == 0) {
+	if (document.cookie.length == 0 ) {
 		first_time = true
 		name = prompt(message)
 		document.cookie = "name=" + name + "; max-age=" +1000000000
 		document.cookie = "times_accessed=1; max-age=" + 1000000000
-	} else {
+	}else if(invalid_name_count != 0){
+		first_time = true
+		name = prompt(message)
+		document.cookie = "name=" + name + "; max-age=" +1000000000
+		document.cookie = "times_accessed=1; max-age=" + 1000000000
+	} 
+	else {
 		first_time=false
 		let cookie = document.cookie.split(";")
 		name = cookie[0].split("=")[1]
