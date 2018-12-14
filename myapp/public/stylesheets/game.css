@@ -43,5 +43,6 @@ td{
 }
 
 .bottom {
+  position: relative;
   margin-top: 17vh;
 }
