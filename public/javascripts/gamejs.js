@@ -1,7 +1,7 @@
 var name
 var invalid_name_count = 0
 var first_time
-var socket = new WebSocket("ws://localhost")
+var socket = new WebSocket("ws://universi.heroku.com")
 var game
 var playernr
 var otherplayernr
