@@ -1,3 +1,10 @@
+@media (max-width: 1440px) {
+    @media (max-height: 900px){
+    div,main,body {
+     content: " We cannot garuentee that you will be able to play the game on ur bad resolution";
+      color: red;
+    }}
+  }
 .middle {
     background-color: grey;
     float: left;

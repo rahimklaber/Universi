@@ -257,9 +257,11 @@ function setName(message) {
 		document.cookie = "times_accessed=1; max-age=" + 1000000000
 	}else if(invalid_name_count != 0){
 		first_time = true
+		let cookie = document.cookie.split(";")
+		let times_accessed = parseInt(cookie[1].split("=")[1], 10) + 1
 		name = prompt(message)
 		document.cookie = "name=" + name + "; max-age=" +1000000000
-		document.cookie = "times_accessed=1; max-age=" + 1000000000
+		document.cookie = "times_accessed="+times_accessed+"; max-age=" + 1000000000
 	} 
 	else {
 		first_time=false
@@ -267,7 +269,7 @@ function setName(message) {
 		name = cookie[0].split("=")[1]
 		let times_accessed = parseInt(cookie[1].split("=")[1], 10) + 1
 		document.cookie = "name=" + name + ";max-age=" + 1000000000
-		document.cookie = "times_accessed=" + times_accessed + ";max-age=" + 1000000000
+		document.cookie = "times_accessed=" + times_accessed + "; max-age=" + 1000000000
 
 	}
 }
