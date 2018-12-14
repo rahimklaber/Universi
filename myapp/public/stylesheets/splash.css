@@ -1,10 +1,14 @@
 @media (max-width: 1440px) {
-    @media (max-height: 900px){
-    div,main,body {
-     content: " We cannot garuentee that you will be able to play the game on ur bad resolution";
-      color: red;
-    }}
-  }
+    @media (max-height: 900px) {
+        .warning::after {
+            content: " We cannot garuentee that you will be able to play the game on ur bad resolution";
+            color: red;
+            height: 500px;
+            width: 500px;
+        }
+    }
+}
+
 .middle {
     background-color: grey;
     float: left;
@@ -15,10 +19,13 @@
     text-align: center;
     color: white;
 }
+
 ::-webkit-scrollbar {
     width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    background: transparent;
+    /* make scrollbar transparent */
 }
+
 .left {
     background-color: white;
     width: 20vw;
@@ -29,7 +36,7 @@
     position: relative;
     margin-left: 10vw;
     min-height: 420px;
-    overflow:auto;
+    overflow: auto;
     max-height: 420px;
 }
 
@@ -46,7 +53,8 @@
     position: relative;
 }
 
-.ongoing::before,.ongoing::after {
+.ongoing::before,
+.ongoing::after {
     content: "⚔️"
 }
 
@@ -54,33 +62,41 @@ body {
     background-color: grey;
 }
 
-.top-ten::before, .top-ten::after {
+.top-ten::before,
+.top-ten::after {
     content: "🏅"
 }
 
-.nr-1::before, .nr-1::after {
+.nr-1::before,
+.nr-1::after {
     content: "🥇"
 }
 
-.nr-2::before, .nr-2::after {
+.nr-2::before,
+.nr-2::after {
     content: "🥈"
 }
 
 
-.nr-3::before, .nr-3::after {
+.nr-3::before,
+.nr-3::after {
     content: "🥉"
 }
 
 
-@keyframes flicker{
-     0%, 100%{
+@keyframes flicker {
+
+    0%,
+    100% {
         opacity: 0.99;
     }
-    50%{
+
+    50% {
         opacity: 0.3;
     }
 }
 
-.ongoing::before,.ongoing::after{
+.ongoing::before,
+.ongoing::after {
     animation: flicker 0.5s linear infinite;
 }
