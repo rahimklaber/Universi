@@ -401,3 +401,17 @@ myapp/node_modules/async-limiter/coverage/lcov-report/sorter.js
 myapp/node_modules/async-limiter/coverage/lcov-report/async-throttle/index.html
 myapp/node_modules/async-limiter/coverage/lcov-report/async-throttle/index.js.html
 myapp/node_modules/ws/package.json
+.vscode\
+.idea\
+
+\.idea/jsLibraryMappings\.xml
+
+\.idea/misc\.xml
+
+\.idea/modules\.xml
+
+\.idea/Universi\.iml
+
+\.idea/vcs\.xml
+
+\.idea/workspace\.xml
